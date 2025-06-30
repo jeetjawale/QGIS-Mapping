@@ -1,0 +1,73 @@
+Your userData.js is already perfectly set up for both per-user and global (admin) review logic.
+
+Let’s summarize what each function does for clarity:
+
+🟢 User Profile Functions
+createUserProfile(user)
+Saves a new user’s data to /users/{uid}.
+
+getUserProfile(uid)
+Loads a user’s profile from /users/{uid}.
+
+updateUserProfile(uid, data)
+Updates fields in a user profile (/users/{uid}).
+
+🟢 (Old) Get All Reviews For Place From User Profiles
+getAllReviewsForPlace(placeName)
+Aggregates all reviews for a place by looping over all users’ review arrays (slow, but works for backward compatibility).
+
+🟢 GLOBAL (ADMIN) REVIEWS
+addOrUpdateGlobalReview(placeName, review)
+Upserts a review to /reviews/{placeName}/{userId}.
+
+deleteGlobalReview(placeName, userId)
+Removes a review from /reviews/{placeName}/{userId}.
+
+getAllGlobalReviewsForPlace(placeName)
+Loads all reviews from /reviews/{placeName} as an array.
+
+🟢 How To Use For Your App
+All review code (in PlacePanel, Popular Near You, etc) should use the “global” version:
+
+getAllGlobalReviewsForPlace
+
+addOrUpdateGlobalReview
+
+deleteGlobalReview
+
+User’s own profile (for favorites or showing “your reviews” on profile page) still uses the user’s /users/{uid}/reviews array.
+
+🟢 Security (Backend/Firebase Rules)
+In your Firebase Realtime Database rules, make sure to enforce:
+
+Only authenticated users can write to /users/{uid} where auth.uid === $uid
+
+Only authenticated users can write to /reviews/{placeName}/{userId} where auth.uid === $userId
+
+Example:
+
+json
+Copy
+Edit
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "reviews": {
+      "$place": {
+        "$userId": {
+          ".read": true,
+          ".write": "auth != null && auth.uid === $userId"
+        }
+      }
+    }
+  }
+}
+🟢 No changes needed in this file right now
+All logic matches what your PlacePanel and frontend expect.
+
+If you want “Popular Near You” or “Top Rated” widgets, just use getAllGlobalReviewsForPlace for each place and calculate average rating/count as needed.

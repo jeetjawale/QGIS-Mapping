@@ -1,0 +1,13 @@
+html, body, #root {
+  height: 100vh !important;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  background: #f2f3f7;
+}
+
+@keyframes slideInPanel {
+  from { transform: translateX(80px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
