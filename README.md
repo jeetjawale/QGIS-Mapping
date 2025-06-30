@@ -45,11 +45,3 @@ This project delivers a **modern, interactive web application** to explore and d
 
 ---
 
-## 📸 Screenshots
-
-<!-- Paste your screenshots here -->
-<img src="screenshots/main-map.png" alt="Main Map" width="600"/>
-<img src="screenshots/place-panel.png" alt="Place Details" width="450"/>
-<img src="screenshots/login-modal.png" alt="Login Modal" width="350"/>
-
----
