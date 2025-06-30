@@ -2,7 +2,7 @@
 
 **Interactive mapping and smart recommendations for Maharashtra’s cultural and heritage sites.**
 
-![React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react)](https://reactjs.org/)
+[![React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react)](https://reactjs.org/)
 ![MapLibre](https://img.shields.io/badge/maps-MapLibre-blue?logo=maplibre)
 ![Firebase](https://img.shields.io/badge/auth-Firebase-yellow?logo=firebase)
 ![Node.js](https://img.shields.io/badge/backend-Node.js-green?logo=node.js)
