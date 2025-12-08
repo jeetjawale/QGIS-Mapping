@@ -34,31 +34,31 @@ Features include site discovery, location-based recommendations, reviews, route 
 ### 🏠 Interactive Map Interface  
 Users can explore heritage sites, search, and apply category/district filters.
 
-![Landing Page](./assets/screenshots/LandingPage.png)
+![Landing Page](./src/assets/screenshots/LandingPage.png)
 
 ---
 
 ### 🔑 Authentication (Login / Signup)
 
-![Login](./assets/screenshots/Login.png)
+![Login](./src/assets/screenshots/Login.png)
 
 ---
 
 ### 🏛️ Place Details & Reviews
 
-![Place Popup](./assets/screenshots/PlacePopupGuest.png)
+![Place Popup](./src/assets/screenshots/PlacePopupGuest.png)
 
 ---
 
 ### ⭐ Posting Reviews
 
-![Write Review](./assets/screenshots/WriteReview.png)
+![Write Review](./src/assets/screenshots/WriteReview.png)
 
 ---
 
 ### 🧭 Route Planning & Navigation
 
-![Route Planning](./assets/screenshots/RouteScreenshot.png)
+![Route Planning](./src/assets/screenshots/RouteScreenshot.png)
 
 ---
 
@@ -84,12 +84,3 @@ Users can explore heritage sites, search, and apply category/district filters.
 6. Updates sync in real-time across users
 
 
----
-
-## 🛠️ Installation
-
-```bash
-git clone https://github.com/jeetjawale/QGIS-Mapping
-cd QGIS-Mapping
-npm install
-npm run dev
