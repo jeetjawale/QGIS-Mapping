@@ -38,7 +38,7 @@ This project delivers a **modern, interactive web application** to explore and d
 ## 🛠️ Tech Stack
 
 - **Frontend:** React, MapLibre GL JS
-- **Backend:** Node.js, Express (for recommendation/ML logic)
+- **Backend:** Node.js
 - **Authentication & Data:** Firebase
 - **Spatial Data:** QGIS (for GeoJSON creation/cleanup)
 - **APIs:** OpenRouteService (directions), OpenWeatherMap (weather)
