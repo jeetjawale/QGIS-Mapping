@@ -1,6 +1,6 @@
-# Heritage Places Map & Recommendation Engine
+# 🏛️ Heritage Places Map & Recommendation Engine
 
-**Interactive mapping and smart recommendations for Maharashtra’s cultural and heritage sites.**
+**Interactive GIS-powered platform to explore Maharashtra’s cultural and heritage sites with smart recommendations, reviews, and real-time navigation.**
 
 [![React](https://img.shields.io/badge/built%20with-React-61DAFB?logo=react)](https://reactjs.org/)
 ![MapLibre](https://img.shields.io/badge/maps-MapLibre-blue?logo=maplibre)
@@ -10,38 +10,86 @@
 
 ---
 
-## 🌏 Project Overview
+## 🌍 Overview
 
-This project delivers a **modern, interactive web application** to explore and discover Maharashtra’s rich cultural heritage. Users can visualize sites, filter by category or district, get smart recommendations, leave reviews, and plan their routes—all in real-time.
+This web application enables users to explore Maharashtra’s cultural heritage using a modern interactive map system.  
+Features include site discovery, location-based recommendations, reviews, route planning, and personalized user experience.
 
 ---
 
 ## 🚀 Features
 
-- **Dynamic Map Visualization:**  
-  Browse Maharashtra’s heritage places on a fast, interactive map (MapLibre + React).
-- **Smart Place Recommendation:**  
-  Get suggestions based on your location, filters (district, category), and community reviews.
-- **Personalized Experience:**  
-  Sign up/login (Firebase Auth), save favorites, and manage your own reviews.
-- **Detailed Place Info:**  
-  Weather info, directions (OpenRouteService, Google Maps), images, and rich descriptions.
-- **Modern UI:**  
-  Responsive design with search, filter bars, and detailed side panels.
-- **Live Data:**  
-  Loads multiple GeoJSON layers (borders, places, districts) for always up-to-date maps.
-- **Review & Rating System:**  
-  Community-powered feedback for every site.
+- 🗺️ **Interactive Map Visualization** using MapLibre GL  
+- 📍 **Smart recommendations** based on distance, ratings & filters  
+- 🔐 **Firebase authentication** (Login, Signup, Password Reset)  
+- ⭐ **Review & Rating system** with favorites  
+- 🧭 **Route planning** using OpenRouteService  
+- 💾 **Dynamic GeoJSON layers** processed via QGIS  
+- 📱 **Fully responsive UI**
 
 ---
 
-## 🛠️ Tech Stack
+## 📷 UI Preview
 
-- **Frontend:** React, MapLibre GL JS
-- **Backend:** Node.js
-- **Authentication & Data:** Firebase
-- **Spatial Data:** QGIS (for GeoJSON creation/cleanup)
-- **APIs:** OpenRouteService (directions), OpenWeatherMap (weather)
+### 🏠 Interactive Map Interface  
+Users can explore heritage sites, search, and apply category/district filters.
+
+![Landing Page](./assets/screenshots/LandingPage.png)
 
 ---
 
+### 🔑 Authentication (Login / Signup)
+
+![Login](./assets/screenshots/Login.png)
+
+---
+
+### 🏛️ Place Details & Reviews
+
+![Place Popup](./assets/screenshots/PlacePopupGuest.png)
+
+---
+
+### ⭐ Posting Reviews
+
+![Write Review](./assets/screenshots/WriteReview.png)
+
+---
+
+### 🧭 Route Planning & Navigation
+
+![Route Planning](./assets/screenshots/RouteScreenshot.png)
+
+---
+
+## 🧠 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | React + MapLibre GL JS |
+| Backend | Node.js |
+| Authentication | Firebase Auth |
+| Spatial Data | QGIS, GeoJSON |
+| External APIs | OpenRouteService, OpenWeatherMap |
+
+---
+
+## 🧭 System Workflow (Summary)
+
+1. User opens the web map (React + MapLibre renders datasets)
+2. GeoJSON layers load dynamically (district borders, site markers)
+3. Filters/search update live with UI state
+4. Reviews, favorites & authentication managed via Firebase
+5. Route planning uses OpenRouteService API
+6. Updates sync in real-time across users
+
+
+---
+
+## 🛠️ Installation
+
+```bash
+git clone https://github.com/jeetjawale/QGIS-Mapping
+cd QGIS-Mapping
+npm install
+npm run dev
