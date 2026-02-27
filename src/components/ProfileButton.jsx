@@ -2,11 +2,12 @@ import React from "react";
 export default function ProfileButton({ user, onClick }) {
   return (
     <button
+      className="avatar-button"
       style={{
         border: "none",
         background: "none",
         cursor: "pointer",
-        marginLeft: 10
+        marginLeft: 4
       }}
       onClick={onClick}
       title={user ? user.name : "Login / Signup"}
@@ -15,22 +16,22 @@ export default function ProfileButton({ user, onClick }) {
         <img
           src={user.photoURL}
           alt="profile"
-          style={{ width: 38, height: 38, borderRadius: "50%", boxShadow: "0 2px 10px #0001" }}
+          style={{ width: 42, height: 42, borderRadius: "50%", boxShadow: "var(--panel-shadow)", objectFit: "cover" }}
         />
       ) : (
         <span
           style={{
-            width: 38,
-            height: 38,
+            width: 42,
+            height: 42,
             borderRadius: "50%",
             display: "inline-block",
-            background: "#e0e6f5",
-            color: "#175ab9",
-            fontSize: 24,
+            background: "rgba(15, 91, 115, 0.12)",
+            color: "var(--accent-strong)",
+            fontSize: 22,
             textAlign: "center",
-            lineHeight: "38px",
+            lineHeight: "42px",
             fontWeight: 700,
-            boxShadow: "0 2px 10px #0001"
+            boxShadow: "var(--panel-shadow)"
           }}
         >👤</span>
       )}
