@@ -314,6 +314,7 @@ export default function PlacePanel({
 
   return (
     <div
+      className="panel panel--slide"
       style={{
         position: "relative",
         width: "min(98vw, 420px)",
@@ -321,9 +322,6 @@ export default function PlacePanel({
         minWidth: "230px",
         maxHeight: "calc(100vh - 44px)",
         zIndex: 30,
-        background: "#fff",
-        borderRadius: 18,
-        boxShadow: "0 8px 32px #39455322, 0 2px 12px #b6bbc633",
         padding: "18px 18px 18px 26px",
         display: "flex",
         flexDirection: "column",
@@ -331,7 +329,6 @@ export default function PlacePanel({
         overflow: "hidden"
       }}
     >
-      {/* Close button */}
       <button
         onClick={onClose}
         style={{
@@ -340,7 +337,7 @@ export default function PlacePanel({
           right: 20,
           fontSize: 28,
           cursor: "pointer",
-          color: "#abb2bf",
+          color: "var(--muted)",
           background: "none",
           border: "none",
           lineHeight: 1,
@@ -352,37 +349,37 @@ export default function PlacePanel({
       </button>
 
       {/* Place info (Place name + rating) */}
-      <b style={{
-        fontSize: 23,
-        color: "#175ab9",
-        marginBottom: 2,
-        wordBreak: "break-word",
-        display: "flex",
-        alignItems: "center",
-        gap: 8,
-      }}>
+      <b
+        className="panel-title"
+        style={{
+          fontSize: 23,
+          marginBottom: 2,
+          wordBreak: "break-word",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+        }}
+      >
         {Places}
         {numReviews > 0 && (
-          <span style={{
+          <span className="rating-pill" style={{
             display: "flex",
             alignItems: "center",
             marginLeft: 8,
-            background: "#f9e7c7",
-            color: "#b28600",
             fontWeight: 700,
             fontSize: 16,
             borderRadius: 10,
             padding: "3px 10px 3px 8px"
           }}>
             {avgRating.toFixed(1)}
-            <span style={{ color: "#ffb700", fontSize: 19, marginLeft: 3 }}>★</span>
-            <span style={{ color: "#888", fontWeight: 500, marginLeft: 8, fontSize: 14 }}>
+            <span style={{ color: "var(--accent-warm)", fontSize: 19, marginLeft: 3 }}>★</span>
+            <span style={{ color: "var(--muted)", fontWeight: 500, marginLeft: 8, fontSize: 14 }}>
               ({numReviews})
             </span>
           </span>
         )}
       </b>
-      <div style={{ fontSize: 15, color: "#555", marginBottom: 4 }}>
+      <div style={{ fontSize: 15, color: "var(--muted)", marginBottom: 4 }}>
         {Location && <><b>Location:</b> {Location}<br /></>}
         {District && <><b>District:</b> {District}<br /></>}
         {Category && <><b>Category:</b> {Category}<br /></>}
@@ -390,82 +387,64 @@ export default function PlacePanel({
 
       {/* Favorites */}
       <div style={{ margin: "6px 0 12px 0" }}>
-  {user ? (
-    Array.isArray(user.favorites) && user.favorites.includes(Places) ? (
-      <button
-        onClick={handleRemoveFavorite}
-        style={{
-          background: "#ffe9e9",
-          color: "#e34e4e",
-          border: "1px solid #ffcdcd",
-          borderRadius: 8,
-          padding: "7px 16px",
-          fontWeight: 600,
-          fontSize: 15,
-          marginRight: 10,
-          cursor: favBusy ? "wait" : "pointer",
-          transition: "background 0.18s"
-        }}
-        disabled={favBusy}
-      >
-        {favBusy ? "Updating..." : "Unfavorite"}
-      </button>
-    ) : (
-      <button
-        onClick={handleAddFavorite}
-        style={{
-          background: "#f6faf7",
-          color: "#2080c0",
-          border: "1px solid #b2e5cc",
-          borderRadius: 8,
-          padding: "7px 16px",
-          fontWeight: 600,
-          fontSize: 15,
-          marginRight: 10,
-          cursor: favBusy ? "wait" : "pointer",
-          transition: "background 0.18s"
-        }}
-        disabled={favBusy}
-      >
-        {favBusy ? "Adding..." : "Add to Favorites"}
-      </button>
-    )
-  ) : (
-    <button
-      onClick={() => setShowLoginModal(true)}
-      style={{
-        background: "#f6faf7",
-        color: "#2080c0",
-        border: "1px solid #b2e5cc",
-        borderRadius: 8,
-        padding: "7px 16px",
-        fontWeight: 600,
-        fontSize: 15,
-        marginRight: 10,
-        cursor: "pointer",
-        opacity: 0.92,
-        transition: "background 0.18s"
-      }}
-    >
-      Add to Favorites
-    </button>
-  )}
-</div>
+        {user ? (
+          Array.isArray(user.favorites) && user.favorites.includes(Places) ? (
+            <button
+              onClick={handleRemoveFavorite}
+              className="soft-button"
+              style={{
+                color: "#c41c3b",
+                padding: "7px 16px",
+                fontSize: 15,
+                marginRight: 10,
+                cursor: favBusy ? "wait" : "pointer"
+              }}
+              disabled={favBusy}
+            >
+              {favBusy ? "Updating..." : "Unfavorite"}
+            </button>
+          ) : (
+            <button
+              onClick={handleAddFavorite}
+              className="soft-button"
+              style={{
+                color: "var(--accent-strong)",
+                padding: "7px 16px",
+                fontSize: 15,
+                marginRight: 10,
+                cursor: favBusy ? "wait" : "pointer"
+              }}
+              disabled={favBusy}
+            >
+              {favBusy ? "Adding..." : "Add to Favorites"}
+            </button>
+          )
+        ) : (
+          <button
+            onClick={() => setShowLoginModal(true)}
+            className="soft-button"
+            style={{
+              color: "var(--accent-strong)",
+              padding: "7px 16px",
+              fontSize: 15,
+              marginRight: 10,
+              cursor: "pointer"
+            }}
+          >
+            Add to Favorites
+          </button>
+        )}
+      </div>
 
 
       {/* Directions/Info */}
-      <div style={{ display: "flex", gap: 12, marginTop: 7, marginBottom: 7 }}>
+      <div style={{ display: "flex", gap: 12, marginTop: 7, marginBottom: 7, flexWrap: "wrap" }}>
         <button
           onClick={() => onDirections(place)}
+          className="primary-button"
           style={{
-            background: "#17a058",
-            color: "#fff",
-            borderRadius: 8,
             padding: "8px 20px",
-            border: "none",
-            fontWeight: 500,
-            fontSize: 16,
-            cursor: "pointer"
+            fontSize: 16
           }}
           title="Directions via OpenRouteService"
         >
@@ -474,15 +453,11 @@ export default function PlacePanel({
         {wikiUrl && (
           <a href={wikiUrl} target="_blank" rel="noopener noreferrer">
             <button
+              className="primary-button"
               style={{
-                background: "#317aff",
-                color: "#fff",
-                borderRadius: 8,
+                background: "var(--accent-strong)",
                 padding: "8px 20px",
-                border: "none",
-                fontWeight: 500,
-                fontSize: 16,
-                cursor: "pointer"
+                fontSize: 16
               }}
             >
               More Info
@@ -490,39 +465,29 @@ export default function PlacePanel({
           </a>
         )}
         {Latitude && Longitude && (
-  <button
-    style={{
-      background: "#34a853",
-      color: "#fff",
-      borderRadius: 8,
-      padding: "8px 20px",
-      border: "none",
-      fontWeight: 500,
-      fontSize: 16,
-      cursor: "pointer"
-    }}
-    title="Google Maps Directions"
-    onClick={handleGoogleDirections}
-  >
-    Google Map Directions
-  </button>
-)}
-
-
+          <button
+            className="primary-button"
+            style={{
+              background: "var(--accent-strong)",
+              padding: "8px 20px",
+              fontSize: 16
+            }}
+            title="Google Maps Directions"
+            onClick={handleGoogleDirections}
+          >
+            Google Maps
+          </button>
+        )}
       </div>
 
       {/* Route Info */}
       {routeSummary && (
         <div
+          className="panel panel--slide"
           style={{
-            background: "#fff",
-            borderRadius: 13,
-            boxShadow: "0 4px 20px #0002",
             padding: "14px 24px 12px 20px",
-            fontSize: 17,
-            border: "1.2px solid #eee",
-            fontFamily: "inherit",
             margin: "16px 0 12px 0",
+            fontSize: 17,
             position: "relative"
           }}
         >
@@ -535,13 +500,13 @@ export default function PlacePanel({
               right: 9,
               border: "none",
               background: "none",
-              color: "#999",
+              color: "var(--muted)",
               fontSize: 24,
               cursor: "pointer",
               fontWeight: 600
             }}
           >&times;</button>
-          <b>Route Info</b><br />
+          <b style={{ fontFamily: "var(--font-display)", color: "var(--accent-strong)" }}>Route Info</b><br />
           <span>Distance: <b>{(routeSummary.distance / 1000).toFixed(1)} km</b></span><br />
           <span>Time: <b>{Math.round(routeSummary.duration / 60)} min</b></span><br />
           <span>
@@ -560,18 +525,18 @@ export default function PlacePanel({
         }}
       >
         {/* Weather */}
-        <div style={{
-          margin: "10px 0 13px 0",
-          fontSize: 16,
-          background: "#f5faff",
-          borderRadius: 9,
-          padding: "9px 15px",
-          minHeight: 40,
-          border: "1.2px solid #e2f1fa"
-        }}>
-          <b>Weather:</b>{" "}
+        <div
+          className="panel"
+          style={{
+            margin: "10px 0 13px 0",
+            fontSize: 16,
+            padding: "9px 15px",
+            minHeight: 40
+          }}
+        >
+          <b style={{ fontFamily: "var(--font-display)", color: "var(--accent-strong)" }}>Weather:</b>{" "}
           {weather === null && !weatherErr && <i>Loading...</i>}
-          {weatherErr && <span style={{ color: "#b85300" }}>{weatherErr}</span>}
+          {weatherErr && <span style={{ color: "var(--ink)" }}>{weatherErr}</span>}
           {weather && (
             <>
               <img
@@ -581,7 +546,7 @@ export default function PlacePanel({
               />
               <b>{Math.round(weather.main.temp)}&deg;C</b>, {weather.weather[0].main}
               {weather.wind && (
-                <span style={{ color: "#666", marginLeft: 12 }}>
+                <span style={{ color: "var(--muted)", marginLeft: 12 }}>
                   Wind: {weather.wind.speed} m/s
                 </span>
               )}
@@ -605,34 +570,36 @@ export default function PlacePanel({
           />
         )}
         {Description && (
-          <div style={{
-            marginBottom: 8,
-            lineHeight: 1.54,
-            fontSize: 16,
-            color: "#262d2f",
-            whiteSpace: "pre-line"
-          }}>
-            <b>Description:</b> {Description}
+          <div
+            style={{
+              marginBottom: 8,
+              lineHeight: 1.54,
+              fontSize: 16,
+              color: "var(--ink)",
+              whiteSpace: "pre-line"
+            }}
+          >
+            <b style={{ fontFamily: "var(--font-display)", color: "var(--accent-strong)" }}>Description:</b> {Description}
           </div>
         )}
 
         {/* Nearby */}
         {nearby.length > 0 && (
-          <div style={{
-            marginTop: 10,
-            marginBottom: 3,
-            background: "#f8f9ff",
-            borderRadius: 9,
-            border: "1px solid #e5e5e5",
-            padding: "10px 13px"
-          }}>
-            <b>Nearby Places:</b>
+          <div
+            className="panel"
+            style={{
+              marginTop: 10,
+              marginBottom: 3,
+              padding: "10px 13px"
+            }}
+          >
+            <b style={{ fontFamily: "var(--font-display)", color: "var(--accent-strong)" }}>Nearby Places:</b>
             <ul style={{ margin: "7px 0 0 10px", padding: 0 }}>
               {nearby.map((p, idx) => (
                 <li key={idx}>
                   <a
                     href="#"
-                    style={{ color: "#166fd1" }}
+                    style={{ color: "var(--accent-strong)" }}
                     onClick={e => {
                       e.preventDefault();
                       onClose && onClose();
@@ -644,8 +611,8 @@ export default function PlacePanel({
                   >
                     {p.Places}
                   </a>
-                  {p.Location && <span style={{ color: "#888", marginLeft: 4, fontSize: 14 }}>({p.Location})</span>}
-                  {p.Category && <span style={{ color: "#bbb", marginLeft: 4, fontSize: 13 }}>— {p.Category}</span>}
+                  {p.Location && <span style={{ color: "var(--muted)", marginLeft: 4, fontSize: 14 }}>({p.Location})</span>}
+                  {p.Category && <span style={{ color: "var(--muted)", marginLeft: 4, fontSize: 13 }}>— {p.Category}</span>}
                 </li>
               ))}
             </ul>
@@ -653,15 +620,13 @@ export default function PlacePanel({
         )}
 
         {/* Reviews */}
-        <hr style={{ border: "none", borderTop: "1.5px solid #e7eaf2", margin: "22px 0 10px 0" }} />
-        <div style={{ fontWeight: 700, fontSize: 19, color: "#2159a6", marginBottom: 6 }}>
+        <hr style={{ border: "none", borderTop: "1.5px solid rgba(27, 38, 49, 0.12)", margin: "22px 0 10px 0" }} />
+        <div style={{ fontWeight: 700, fontSize: 19, color: "var(--accent-strong)", marginBottom: 6, fontFamily: "var(--font-display)" }}>
           User Reviews
         </div>
         <div
+          className="panel"
           style={{
-            border: "1px solid #f2f4fa",
-            background: "#f9fafd",
-            borderRadius: 10,
             padding: "10px 0 10px 0",
             marginBottom: 8,
             maxHeight: 220,
@@ -670,10 +635,10 @@ export default function PlacePanel({
           }}
         >
           {firstLoad && loadingAllReviews && (
-            <div style={{ marginTop: 10, color: "#888" }}>Loading user reviews…</div>
+            <div style={{ marginTop: 10, color: "var(--muted)" }}>Loading user reviews…</div>
           )}
           {!loadingAllReviews && sortedReviews.length === 0 && (
-            <div style={{ marginTop: 10, color: "#888" }}><i>No reviews from users yet.</i></div>
+            <div style={{ marginTop: 10, color: "var(--muted)" }}><i>No reviews from users yet.</i></div>
           )}
           {!loadingAllReviews && sortedReviews.length > 0 && (
             <ul style={{
@@ -685,58 +650,96 @@ export default function PlacePanel({
               {sortedReviews.map((r, i) => (
                 <li
                   key={i}
+                  className="panel"
                   style={{
                     marginBottom: 14,
-                    background: (user && r.userId === user?.uid) ? "#eaf6ff" : "#fff",
-                    borderRadius: 12,
-                    boxShadow: "0 1px 6px #0001",
                     padding: "13px 15px",
                     display: "flex",
                     alignItems: "flex-start",
                     gap: 13,
                     borderLeft: (user && r.userId === user?.uid)
-                      ? "4px solid #2a66b8"
-                      : "4px solid transparent"
+                      ? "4px solid var(--accent)"
+                      : "4px solid transparent",
+                    background: (user && r.userId === user?.uid) ? "rgba(15, 91, 115, 0.08)" : undefined
                   }}
                 >
                   {/* Avatar and Name */}
                   <div style={{ minWidth: 42, textAlign: "center" }}>
                     {r.userPhoto
-                      ? <img src={r.userPhoto} alt="" style={{
-                          width: 32, height: 32, borderRadius: "50%", objectFit: "cover", border: "1px solid #e3e6ea"
-                        }} />
-                      : <span style={{
-                          display: "inline-block", width: 32, height: 32, borderRadius: "50%",
-                          background: "#2a66b8", color: "#fff", textAlign: "center", fontSize: 18, lineHeight: "32px", fontWeight: 700
-                        }}>{r.userName?.[0]?.toUpperCase() || "?"}</span>
+                      ? <img
+                          src={r.userPhoto}
+                          alt=""
+                          style={{
+                            width: 32,
+                            height: 32,
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            border: "1px solid rgba(27, 38, 49, 0.12)"
+                          }}
+                        />
+                      : <span
+                          style={{
+                            display: "inline-block",
+                            width: 32,
+                            height: 32,
+                            borderRadius: "50%",
+                            background: "var(--accent)",
+                            color: "#fff",
+                            textAlign: "center",
+                            fontSize: 18,
+                            lineHeight: "32px",
+                            fontWeight: 700
+                          }}
+                        >
+                          {r.userName?.[0]?.toUpperCase() || "?"}
+                        </span>
                     }
-                    <div style={{
-                      fontWeight: 600,
-                      fontSize: 15,
-                      marginTop: 3,
-                      color: "#1e232a"
-                    }}>{r.userName || "User"}</div>
-                    <div style={{ color: "#aaa", fontSize: 12, marginTop: 1 }}>
+                    <div
+                      style={{
+                        fontWeight: 600,
+                        fontSize: 15,
+                        marginTop: 3,
+                        color: "var(--ink)"
+                      }}
+                    >
+                      {r.userName || "User"}
+                    </div>
+                    <div style={{ color: "var(--muted)", fontSize: 12, marginTop: 1 }}>
                       {r.date && new Date(r.date).toLocaleDateString()}
                     </div>
                   </div>
                   {/* Review Body & Edit/Delete */}
                   <div style={{ flex: 1 }}>
                     <div style={{ marginBottom: 3, display: "flex", alignItems: "center", gap: 9 }}>
-                      <span style={{ color: "#ffb700", fontSize: 20, letterSpacing: 2 }}>
+                      <span style={{ color: "var(--accent-warm)", fontSize: 20, letterSpacing: 2 }}>
                         {"★".repeat(r.rating)}
                       </span>
                       {/* Only show Edit/Delete for current user's review */}
                       {user && r.userId === user?.uid && !editingReview && (
                         <span>
-                          <button style={{
-                            background: "none", border: "none", color: "#1777ee", cursor: "pointer", fontSize: 15, marginRight: 3
-                          }} onClick={() => startEditReview(r)}>
+                          <button
+                            style={{
+                              background: "none",
+                              border: "none",
+                              color: "var(--accent)",
+                              cursor: "pointer",
+                              fontSize: 15,
+                              marginRight: 3
+                            }}
+                            onClick={() => startEditReview(r)}
+                          >
                             ✏️ Edit
                           </button>
-                          <button style={{
-                            background: "none", border: "none", color: "#dd3333", cursor: "pointer", fontSize: 15
-                          }} onClick={handleDeleteReview}>
+                          <button
+                            style={{
+                              background: "none",
+                              border: "none",
+                              color: "#c41c3b",
+                              cursor: "pointer",
+                              fontSize: 15
+                            }}
+                            onClick={handleDeleteReview}
+                          >
                             🗑️ Delete
                           </button>
                         </span>
@@ -744,16 +747,18 @@ export default function PlacePanel({
                     </div>
                     {/* Show plain review text (not editable unless editing own review) */}
                     {(!editingReview || r.userId !== user?.uid) && (
-                      <div style={{
-                        color: "#1a1b1d",
-                        fontSize: 16,
-                        marginLeft: 1,
-                        whiteSpace: "pre-line",
-                        lineHeight: 1.55,
-                        wordBreak: "break-word",
-                        overflowX: "hidden",
-                        maxWidth: "100%"
-                      }}>
+                      <div
+                        style={{
+                          color: "var(--ink)",
+                          fontSize: 16,
+                          marginLeft: 1,
+                          whiteSpace: "pre-line",
+                          lineHeight: 1.55,
+                          wordBreak: "break-word",
+                          overflowX: "hidden",
+                          maxWidth: "100%"
+                        }}
+                      >
                         {r.text}
                       </div>
                     )}
@@ -772,10 +777,14 @@ export default function PlacePanel({
                                 style={{ display: "none" }}
                                 required
                               />
-                              <span style={{
-                                fontSize: 21,
-                                color: editRating >= star ? "#ffb700" : "#bbb"
-                              }}>★</span>
+                              <span
+                                style={{
+                                  fontSize: 21,
+                                  color: editRating >= star ? "var(--accent-warm)" : "var(--muted)"
+                                }}
+                              >
+                                ★
+                              </span>
                             </label>
                           ))}
                         </span>
@@ -787,12 +796,29 @@ export default function PlacePanel({
                           required
                         />
                         <br />
-                        <button type="submit" disabled={reviewBusy}
-                          style={{ background: "#317aff", color: "#fff", borderRadius: 7, padding: "7px 20px", border: "none", fontWeight: 500, fontSize: 16, marginTop: 6 }}>
+                        <button
+                          type="submit"
+                          disabled={reviewBusy}
+                          className="primary-button"
+                          style={{
+                            padding: "7px 20px",
+                            fontSize: 16,
+                            marginTop: 6
+                          }}
+                        >
                           {reviewBusy ? "Saving..." : "Save"}
                         </button>
-                        <button type="button" onClick={() => setEditingReview(false)}
-                          style={{ background: "none", color: "#888", border: "none", fontSize: 15, marginLeft: 8 }}>
+                        <button
+                          type="button"
+                          onClick={() => setEditingReview(false)}
+                          style={{
+                            background: "none",
+                            color: "var(--muted)",
+                            border: "none",
+                            fontSize: 15,
+                            marginLeft: 8
+                          }}
+                        >
                           Cancel
                         </button>
                       </form>
@@ -809,15 +835,10 @@ export default function PlacePanel({
           <div style={{ textAlign: "left", marginBottom: 18 }}>
             <button
               onClick={openReviewForm}
+              className="primary-button"
               style={{
-                background: "#317aff",
-                color: "#fff",
-                borderRadius: 8,
                 padding: "10px 25px",
-                fontWeight: 600,
-                border: "none",
                 fontSize: 17,
-                cursor: "pointer",
                 marginTop: 5,
                 marginBottom: 0
               }}
@@ -843,11 +864,15 @@ export default function PlacePanel({
                     style={{ display: "none" }}
                     required
                   />
-                  <span style={{
-                    fontSize: 21,
-                    color: reviewRating >= star ? "#ffb700" : "#bbb",
-                    cursor: "pointer"
-                  }}>★</span>
+                  <span
+                    style={{
+                      fontSize: 21,
+                      color: reviewRating >= star ? "var(--accent-warm)" : "var(--muted)",
+                      cursor: "pointer"
+                    }}
+                  >
+                    ★
+                  </span>
                 </label>
               ))}
             </span>
@@ -859,20 +884,31 @@ export default function PlacePanel({
               required
             />
             <br />
-            <button type="submit"
+            <button
+              type="submit"
               disabled={reviewBusy}
+              className="primary-button"
               style={{
-                background: "#317aff", color: "#fff", borderRadius: 7, padding: "7px 20px",
-                border: "none", fontWeight: 500, fontSize: 16, marginTop: 6, cursor: reviewBusy ? "wait" : "pointer"
+                padding: "7px 20px",
+                fontSize: 16,
+                marginTop: 6
               }}
-            >{reviewBusy ? "Submitting..." : "Submit"}</button>
-            <button type="button"
+            >
+              {reviewBusy ? "Submitting..." : "Submit"}
+            </button>
+            <button
+              type="button"
               onClick={() => setReviewFormOpen(false)}
               style={{
-                background: "none", color: "#888", border: "none",
-                fontSize: 16, marginLeft: 12
+                background: "none",
+                color: "var(--muted)",
+                border: "none",
+                fontSize: 16,
+                marginLeft: 12
               }}
-            >Cancel</button>
+            >
+              Cancel
+            </button>
           </form>
         )}
 

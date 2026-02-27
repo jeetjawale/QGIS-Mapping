@@ -1,13 +1,77 @@
-html, body, #root {
-  height: 100vh !important;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-  overflow: hidden !important;
-  background: #f2f3f7;
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap");
+
+:root {
+  --font-display: "Space Grotesk", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --ink: #1b2631;
+  --muted: #5f6b78;
+  --accent: #0f5b73;
+  --accent-strong: #0a475b;
+  --accent-warm: #e38b2c;
+  --panel-bg: rgba(255, 255, 255, 0.92);
+  --panel-border: rgba(15, 91, 115, 0.18);
+  --panel-shadow: 0 14px 40px rgba(21, 34, 48, 0.14), 0 4px 14px rgba(21, 34, 48, 0.08);
+  --input-border: rgba(27, 38, 49, 0.18);
+  --input-shadow: 0 6px 16px rgba(23, 40, 56, 0.12);
+  --overlay: rgba(18, 24, 33, 0.35);
 }
 
-@keyframes slideInPanel {
-  from { transform: translateX(80px); opacity: 0; }
-  to   { transform: none; opacity: 1; }
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 700px at 10% 10%, rgba(227, 139, 44, 0.22), transparent 60%),
+    radial-gradient(900px 600px at 90% 10%, rgba(15, 91, 115, 0.22), transparent 55%),
+    linear-gradient(135deg, #f8f5ef 0%, #edf1f6 60%, #f7f2ea 100%);
+}
+
+#root {
+  background: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(15, 91, 115, 0.2);
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(95, 107, 120, 0.08);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 91, 115, 0.3);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 91, 115, 0.5);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 91, 115, 0.3) rgba(95, 107, 120, 0.08);
 }

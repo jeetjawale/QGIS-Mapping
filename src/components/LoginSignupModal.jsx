@@ -11,17 +11,19 @@ import { showSuccess, showError } from "../utils/toastUtils";
 
 const inputStyle = {
   fontSize: 19,
-  border: "2px solid #ccc",
   borderRadius: 12,
-  background: "#fff",
+  background: "var(--panel-bg)",
+  border: "1.5px solid var(--input-border)",
   padding: "10px 15px",
   minHeight: 44,
   width: "100%",
   marginBottom: 16,
   boxSizing: "border-box",
   outline: "none",
-  boxShadow: "0 1.5px 6px #0001",
-  transition: "border-color 0.2s, box-shadow 0.2s"
+  boxShadow: "var(--input-shadow)",
+  transition: "border-color 0.2s, box-shadow 0.2s",
+  color: "var(--ink)",
+  fontFamily: "var(--font-body)"
 };
 
 export default function LoginSignupModal({ onLogin, onClose }) {
@@ -129,27 +131,29 @@ export default function LoginSignupModal({ onLogin, onClose }) {
   }
 
   return (
-    <div style={{
-      position: "fixed",
-      inset: 0,
-      zIndex: 1000,
-      background: "rgba(32,32,40,0.14)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    }}>
-      <div style={{
-        position: "relative",
-        background: "#fff",
-        borderRadius: 18,
-        width: 380,
-        maxWidth: "97vw",
-        boxShadow: "0 8px 32px #3945532a, 0 2px 12px #b6bbc633",
-        padding: "36px 38px 34px 38px",
+    <div
+      className="modal-overlay"
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 1000,
         display: "flex",
-        flexDirection: "column",
-        fontSize: 17
-      }}>
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <div
+        className="panel panel--slide"
+        style={{
+          position: "relative",
+          width: 380,
+          maxWidth: "97vw",
+          padding: "36px 38px 34px 38px",
+          display: "flex",
+          flexDirection: "column",
+          fontSize: 17
+        }}
+      >
         <button
           onClick={onClose}
           style={{
@@ -159,7 +163,7 @@ export default function LoginSignupModal({ onLogin, onClose }) {
             fontSize: 26,
             background: "none",
             border: "none",
-            color: "#888",
+            color: "var(--muted)",
             cursor: "pointer"
           }}
           aria-label="Close"
@@ -171,11 +175,12 @@ export default function LoginSignupModal({ onLogin, onClose }) {
             style={{
               fontWeight: tab === "login" ? 700 : 500,
               fontSize: 25,
-              color: tab === "login" ? "#1967d2" : "#222",
+              color: tab === "login" ? "var(--accent-strong)" : "var(--ink)",
               cursor: "pointer",
               marginRight: 30,
-              borderBottom: tab === "login" ? "2px solid #1967d2" : "2px solid transparent",
-              paddingBottom: 3
+              borderBottom: tab === "login" ? "2px solid var(--accent-strong)" : "2px solid transparent",
+              paddingBottom: 3,
+              fontFamily: "var(--font-display)"
             }}
           >Login</span>
           <span
@@ -183,11 +188,12 @@ export default function LoginSignupModal({ onLogin, onClose }) {
             style={{
               fontWeight: tab === "signup" ? 700 : 500,
               fontSize: 25,
-              color: tab === "signup" ? "#1967d2" : "#222",
+              color: tab === "signup" ? "var(--accent-strong)" : "var(--ink)",
               cursor: "pointer",
               marginRight: 0,
-              borderBottom: tab === "signup" ? "2px solid #1967d2" : "2px solid transparent",
-              paddingBottom: 3
+              borderBottom: tab === "signup" ? "2px solid var(--accent-strong)" : "2px solid transparent",
+              paddingBottom: 3,
+              fontFamily: "var(--font-display)"
             }}
           >Signup</span>
         </div>
@@ -212,7 +218,7 @@ export default function LoginSignupModal({ onLogin, onClose }) {
             />
             <div style={{ textAlign: "right", marginBottom: 14 }}>
               <span
-                style={{ color: "#1578ce", fontSize: 16, cursor: "pointer" }}
+                style={{ color: "var(--accent)", fontSize: 16, cursor: "pointer" }}
                 onClick={() => switchTab("forgot")}
               >Forgot password?</span>
             </div>
@@ -221,15 +227,10 @@ export default function LoginSignupModal({ onLogin, onClose }) {
             <button
               type="submit"
               disabled={loading}
+              className="primary-button"
               style={{
-                background: "#1967d2",
-                color: "#fff",
-                border: "none",
-                borderRadius: 8,
                 padding: "12px 0",
-                fontWeight: 700,
                 fontSize: 20,
-                cursor: "pointer",
                 width: "100%",
                 marginTop: 10
               }}
@@ -276,15 +277,10 @@ export default function LoginSignupModal({ onLogin, onClose }) {
             <button
               type="submit"
               disabled={loading}
+              className="primary-button"
               style={{
-                background: "#1967d2",
-                color: "#fff",
-                border: "none",
-                borderRadius: 8,
                 padding: "12px 0",
-                fontWeight: 700,
                 fontSize: 20,
-                cursor: "pointer",
                 width: "100%",
                 marginTop: 10
               }}
@@ -308,22 +304,17 @@ export default function LoginSignupModal({ onLogin, onClose }) {
             <button
               type="submit"
               disabled={loading}
+              className="primary-button"
               style={{
-                background: "#1967d2",
-                color: "#fff",
-                border: "none",
-                borderRadius: 8,
                 padding: "12px 0",
-                fontWeight: 700,
                 fontSize: 20,
-                cursor: "pointer",
                 width: "100%",
                 marginTop: 10
               }}
             >{loading ? "Sending..." : "Send Reset Link"}</button>
             <div style={{ textAlign: "right", marginTop: 13 }}>
               <span
-                style={{ color: "#1578ce", fontSize: 15, cursor: "pointer" }}
+                style={{ color: "var(--accent)", fontSize: 15, cursor: "pointer" }}
                 onClick={() => switchTab("login")}
               >Back to login</span>
             </div>

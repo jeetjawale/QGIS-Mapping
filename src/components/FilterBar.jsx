@@ -2,22 +2,25 @@ import React, { useState, useRef, useEffect } from "react";
 
 const inputBoxStyle = {
   fontSize: 16,
-  border: "2px solid #ccc",
   borderRadius: 12,
-  background: "#fff",
-  padding: "10px 15px 10px 10px",
-  minHeight: 45,
+  background: "var(--panel-bg)",
+  border: "1.5px solid var(--input-border)",
+  padding: "10px 14px 10px 10px",
+  minHeight: 46,
   width: "100%",
   boxSizing: "border-box",
   outline: "none",
-  boxShadow: "0 1.5px 6px #0001",
+  boxShadow: "var(--input-shadow)",
   cursor: "pointer",
   userSelect: "none",
   display: "flex",
   alignItems: "center",
   flexWrap: "wrap",
   gap: 7,
-  overflow: "hidden"
+  overflow: "hidden",
+  color: "var(--ink)",
+  transition: "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
+  fontFamily: "var(--font-body)"
 };
 
 const dropdownStyle = {
@@ -25,14 +28,12 @@ const dropdownStyle = {
   top: "110%",
   left: 0,
   width: 250,
-  background: "#fff",
-  boxShadow: "0 2px 10px #0002",
-  borderRadius: 10,
-  zIndex: 12,
+  borderRadius: 12,
+  zIndex: 35,
   maxHeight: 270,
   overflowY: "auto",
-  padding: "5px 0",
-  overflowX: "hidden"  // No horizontal scroll!
+  padding: "6px 0",
+  overflowX: "hidden"
 };
 
 const checkboxLabel = {
@@ -42,11 +43,12 @@ const checkboxLabel = {
   cursor: "pointer",
   fontSize: 16,
   transition: "background 0.13s",
-  borderRadius: 6,
+  borderRadius: 8,
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
   width: "100%",
+  color: "var(--ink)"
 };
 
 function MultiSelect({ label, options, selected, setSelected, width = 250, single = false }) {
@@ -78,7 +80,7 @@ function MultiSelect({ label, options, selected, setSelected, width = 250, singl
       ? (
           single
             ? <span style={{
-                color: "#2a66b8",
+                color: "var(--accent-strong)",
                 fontWeight: 600,
                 maxWidth: width - 35,
                 overflow: "hidden",
@@ -88,7 +90,7 @@ function MultiSelect({ label, options, selected, setSelected, width = 250, singl
               }}>
                 {selected[0]}
                 <span
-                  style={{ marginLeft: 8, color: "#888", cursor: "pointer", fontSize: 19, fontWeight: 500 }}
+                  style={{ marginLeft: 8, color: "var(--muted)", cursor: "pointer", fontSize: 19, fontWeight: 500 }}
                   onClick={e => {
                     e.stopPropagation();
                     setSelected([]);
@@ -100,38 +102,47 @@ function MultiSelect({ label, options, selected, setSelected, width = 250, singl
               </span>
             : selected.map((opt) => (
                 <span key={opt} style={{
-                  background: "#f0f4ff", color: "#2a66b8", borderRadius: 16, padding: "3px 9px", marginRight: 3
-                }}>{opt} <span style={{marginLeft:3, cursor:'pointer'}} onClick={e=>{e.stopPropagation();toggleOption(opt)}}>×</span></span>
+                  background: "rgba(15, 91, 115, 0.12)", color: "var(--accent-strong)", borderRadius: 16, padding: "3px 9px", marginRight: 3
+                }}>{opt} <span style={{marginLeft:3, cursor:"pointer"}} onClick={e=>{e.stopPropagation();toggleOption(opt)}}>×</span></span>
               ))
         )
-      : <span style={{ color: "#aaa" }}>All {label}</span>;
+      : <span style={{ color: "var(--muted)" }}>All {label}</span>;
 
   return (
     <div style={{ position: "relative", width, minWidth: width, maxWidth: width }} ref={ref}>
-      <div style={{
-        ...inputBoxStyle,
-        width: "100%",
-        overflow: "hidden"
-      }} tabIndex={0} onClick={() => setOpen((o) => !o)}>
+      <div
+        className="ui-input"
+        style={{
+          ...inputBoxStyle,
+          width: "100%",
+          overflow: "hidden"
+        }}
+        tabIndex={0}
+        onClick={() => setOpen((o) => !o)}
+      >
         {display}
         <span style={{ marginLeft: "auto", fontSize: 17, color: "#aaa" }}>{open ? "▲" : "▼"}</span>
       </div>
       {open && (
-        <div style={dropdownStyle}>
+        <div className="ui-dropdown" style={dropdownStyle}>
           {options.length === 0 && (
             <div style={{ padding: "10px 16px", color: "#888" }}><i>No options</i></div>
           )}
           {options.map((option) => (
-            <label key={option} style={{
-              ...checkboxLabel,
-              background: selected.includes(option) ? "#e8f2ff" : undefined,
-              fontWeight: selected.includes(option) ? 600 : 400
-            }}>
+            <label
+              key={option}
+              className="ui-option"
+              style={{
+                ...checkboxLabel,
+                background: selected.includes(option) ? "rgba(15, 91, 115, 0.12)" : undefined,
+                fontWeight: selected.includes(option) ? 600 : 400
+              }}
+            >
               <input
                 type={single ? "radio" : "checkbox"}
                 checked={selected.includes(option)}
                 onChange={() => toggleOption(option)}
-                style={{ marginRight: 8, accentColor: "#175ab9", flexShrink: 0 }}
+                style={{ marginRight: 8, accentColor: "var(--accent)", flexShrink: 0 }}
               />
               <span style={{
                 overflow: "hidden",

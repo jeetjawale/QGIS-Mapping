@@ -74,14 +74,23 @@ export default function PopularNearYou({ places, userLocation, selectedDistricts
     : "Popular Near You";
 
   return (
-    <div style={{
-      position: "absolute", top: 76, left: 20, zIndex: 25,
-      background: "#fff", borderRadius: 15, boxShadow: "0 4px 16px #0001",
-      width: 278, maxWidth: "95vw", padding: "18px 20px"
-    }}>
-      <b style={{ fontSize: 20, color: "#2a66b8" }}>{panelTitle}</b>
+    <div
+      className="panel panel--slide"
+      style={{
+        position: "absolute",
+        top: 110,
+        left: 20,
+        zIndex: 25,
+        width: 278,
+        maxWidth: "95vw",
+        maxHeight: "calc(100vh - 140px)",
+        padding: "18px 20px",
+        overflowY: "auto"
+      }}
+    >
+      <b className="panel-title" style={{ fontSize: 20 }}>{panelTitle}</b>
       {nearby.length === 0 ? (
-        <div style={{ color: "#888", marginTop: 12 }}>No popular places.</div>
+        <div style={{ color: "var(--muted)", marginTop: 12 }}>No popular places.</div>
       ) : (
         <ul style={{ margin: "13px 0 0 0", padding: 0, listStyle: "none" }}>
           {nearby.map((p, idx) => (
@@ -89,21 +98,28 @@ export default function PopularNearYou({ places, userLocation, selectedDistricts
               marginBottom: 11,
               borderBottom: idx < nearby.length - 1 ? "1px solid #f0f0f0" : "none",
               paddingBottom: 8,
-            }}>
+              padding: "8px",
+              borderRadius: "8px",
+              transition: "background 0.2s ease",
+              cursor: "pointer"
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = "rgba(15, 91, 115, 0.05)"}
+            onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+            >
               <a
                 href="#"
                 onClick={e => { e.preventDefault(); handleClick(p); }}
                 style={{
                   fontWeight: 700,
                   fontSize: 17,
-                  color: "#175ab9",
+                  color: "var(--accent-strong)",
                   cursor: "pointer",
                   textDecoration: "none"
                 }}
               >
                 {p.Places}
               </a>
-              <span style={{ color: "#666", fontSize: 14, marginLeft: 6 }}>
+              <span style={{ color: "var(--muted)", fontSize: 14, marginLeft: 6 }}>
                 ({p.Category}){p._dist_km !== undefined && ` — ${p._dist_km.toFixed(2)} km`}
               </span>
               <br />
@@ -111,15 +127,15 @@ export default function PopularNearYou({ places, userLocation, selectedDistricts
                 {p.reviewCount
                   ? (
                     <>
-                      <span style={{ color: "#ffb700", fontWeight: 700 }}>
+                      <span style={{ color: "var(--accent-warm)", fontWeight: 700 }}>
                         {p.avgRating.toFixed(1)}★
                       </span>
-                      <span style={{ color: "#444", fontWeight: 500, marginLeft: 4 }}>
+                      <span style={{ color: "var(--muted)", fontWeight: 500, marginLeft: 4 }}>
                         · {p.reviewCount} review{p.reviewCount > 1 ? "s" : ""}
                       </span>
                     </>
                   )
-                  : <span style={{ color: "#aaa", fontStyle: "italic" }}>No reviews yet</span>
+                  : <span style={{ color: "var(--muted)", fontStyle: "italic" }}>No reviews yet</span>
                 }
               </span>
             </li>

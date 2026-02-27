@@ -1,13 +1,166 @@
-html, body, #root {
-  height: 100vh !important;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-  overflow: hidden !important;
-  background: #f2f3f7;
+@keyframes panelSlideIn {
+  from {
+    transform: translateX(80px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
 }
 
-@keyframes slideInPanel {
-  from { transform: translateX(80px); opacity: 0; }
-  to   { transform: none; opacity: 1; }
+.map-shell {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.toolbar {
+  position: absolute;
+  z-index: 20;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 18px;
+  box-shadow: var(--panel-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.ui-input {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid var(--input-border);
+  border-radius: 12px;
+  box-shadow: var(--input-shadow);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ui-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(15, 91, 115, 0.2), var(--input-shadow);
+  outline: none;
+}
+
+.ui-dropdown {
+  background: var(--panel-bg);
+  border: 1px solid rgba(15, 91, 115, 0.12);
+  border-radius: 12px;
+  box-shadow: var(--panel-shadow);
+  backdrop-filter: blur(8px);
+}
+
+.ui-option {
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ui-option:hover {
+  background: rgba(15, 91, 115, 0.08);
+}
+
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 18px;
+  box-shadow: var(--panel-shadow);
+  backdrop-filter: blur(12px);
+}
+
+.panel--slide {
+  animation: panelSlideIn 0.35s ease;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  color: var(--accent-strong);
+}
+
+.avatar-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 91, 115, 0.18);
+  background: rgba(255, 255, 255, 0.8);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(23, 40, 56, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.avatar-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(23, 40, 56, 0.2);
+}
+
+.soft-button {
+  border-radius: 10px;
+  border: 1px solid rgba(15, 91, 115, 0.18);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--accent-strong);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.soft-button:hover {
+  background: rgba(15, 91, 115, 0.08);
+  transform: translateY(-1px);
+}
+
+.primary-button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(15, 91, 115, 0.28);
+}
+
+.modal-overlay {
+  background: var(--overlay);
+  backdrop-filter: blur(6px);
+}
+
+.rating-pill {
+  background: rgba(227, 139, 44, 0.2);
+  color: #8a540e;
+}
+
+/* Responsive adjustments for mobile/tablet */
+@media (max-width: 768px) {
+  .toolbar {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    gap: 10px;
+    padding: 10px 12px;
+    flex-wrap: wrap;
+  }
+
+  .panel {
+    border-radius: 14px;
+  }
+
+  .panel--slide {
+    animation: panelSlideIn 0.25s ease;
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar {
+    gap: 8px;
+    padding: 8px 10px;
+  }
 }

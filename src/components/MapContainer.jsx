@@ -502,17 +502,9 @@ useEffect(() => {
 
   // ===== RENDER =====
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div className="map-shell">
       {/* --- Top controls --- */}
-      <div style={{
-        position: "absolute",
-        zIndex: 20,
-        top: 20,
-        left: 20,
-        display: "flex",
-        gap: 18,
-        alignItems: "center"
-      }}>
+      <div className="toolbar">
         <SearchBar
           places={filteredPlaces}
           onSelect={p => {

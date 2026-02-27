@@ -1,17 +1,19 @@
 import React, { useState, useRef } from "react";
 
 const inputBoxStyle = {
-  fontSize: 20,
-  border: "2px solid #ccc",
+  fontSize: 18,
   borderRadius: 12,
-  background: "#fff",
+  background: "var(--panel-bg)",
+  border: "1.5px solid var(--input-border)",
   padding: "10px 15px",
-  minHeight: 45,
+  minHeight: 46,
   width: "100%",
   boxSizing: "border-box",
   outline: "none",
-  boxShadow: "0 1.5px 6px #0001",
-  transition: "border-color 0.2s, box-shadow 0.2s"
+  boxShadow: "var(--input-shadow)",
+  transition: "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
+  color: "var(--ink)",
+  fontFamily: "var(--font-body)"
 };
 
 export default function SearchBar({ places, onSelect, onFocus, onBlur }) {
@@ -54,6 +56,7 @@ export default function SearchBar({ places, onSelect, onFocus, onBlur }) {
       <input
         type="text"
         placeholder="Search places, locations, districts."
+        className="ui-input"
         style={inputBoxStyle}
         value={q}
         onChange={e => {
@@ -71,33 +74,34 @@ export default function SearchBar({ places, onSelect, onFocus, onBlur }) {
         autoComplete="off"
       />
       {show && filtered.length > 0 && (
-        <div style={{
-          position: "absolute",
-          top: 56, left: 0, right: 0,
-          background: "#fff",
-          border: "1.5px solid #d3e0ed",
-          borderRadius: 10,
-          boxShadow: "0 3px 15px #0002",
-          zIndex: 31,
-          maxHeight: 300,
-          overflowY: "auto"
-        }}>
+        <div
+          className="ui-dropdown"
+          style={{
+            position: "absolute",
+            top: 56,
+            left: 0,
+            right: 0,
+            zIndex: 36,
+            maxHeight: 300,
+            overflowY: "auto"
+          }}
+        >
           {filtered.map((p, idx) => (
             <div
               key={idx}
+              className="ui-option"
               style={{
                 padding: "13px 16px",
-                fontSize: 18,
+                fontSize: 17,
                 cursor: "pointer",
-                borderBottom: idx < filtered.length - 1 ? "1px solid #f4f4f4" : "none",
-                background: "#fff"
+                borderBottom: idx < filtered.length - 1 ? "1px solid rgba(27, 38, 49, 0.08)" : "none"
               }}
               onMouseDown={e => { e.preventDefault(); handleSelect(p); }}
             >
               <b>{p.Places}</b>
-              {p.Location && <> — <span style={{ color: "#666" }}>{p.Location}</span></>}
+              {p.Location && <> — <span style={{ color: "var(--muted)" }}>{p.Location}</span></>}
               {p.District && <> ({p.District})</>}
-              {p.Category && <span style={{ color: "#999", fontSize: 16, marginLeft: 5 }}>[{p.Category}]</span>}
+              {p.Category && <span style={{ color: "var(--muted)", fontSize: 15, marginLeft: 5 }}>[{p.Category}]</span>}
             </div>
           ))}
         </div>
